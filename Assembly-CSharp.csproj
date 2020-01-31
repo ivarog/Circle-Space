@@ -45,7 +45,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\CameraResolution.cs" />
+     <Compile Include="Assets\Scripts\CameraResolution.cs" />
      <Compile Include="Assets\Scripts\PlanetController.cs" />
      <Compile Include="Assets\Scripts\PlanetSpaceController.cs" />
      <Compile Include="Assets\Scripts\ShipController.cs" />

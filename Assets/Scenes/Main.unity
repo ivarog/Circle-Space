@@ -352,6 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationVelocity: 80
   travelVelocity: 150
+  planetsSpace: {fileID: 1825987433}
 --- !u!50 &495130963
 Rigidbody2D:
   serializedVersion: 4
@@ -550,17 +551,17 @@ PrefabInstance:
     - target: {fileID: 613110176365555319, guid: 8c287ed45b99c74448265178fab2799c,
         type: 3}
       propertyPath: m_Name
-      value: Planet (1)
+      value: Planet_2
       objectReference: {fileID: 0}
     - target: {fileID: 2505662216523478070, guid: 8c287ed45b99c74448265178fab2799c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.14
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2505662216523478070, guid: 8c287ed45b99c74448265178fab2799c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.78
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 2505662216523478070, guid: 8c287ed45b99c74448265178fab2799c,
         type: 3}
@@ -5442,17 +5443,17 @@ PrefabInstance:
     - target: {fileID: 613110176365555319, guid: 8c287ed45b99c74448265178fab2799c,
         type: 3}
       propertyPath: m_Name
-      value: Planet
+      value: Planet_1
       objectReference: {fileID: 0}
     - target: {fileID: 2505662216523478070, guid: 8c287ed45b99c74448265178fab2799c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.003
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2505662216523478070, guid: 8c287ed45b99c74448265178fab2799c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.006
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2505662216523478070, guid: 8c287ed45b99c74448265178fab2799c,
         type: 3}
@@ -5655,6 +5656,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 495130958}
+  planet: {fileID: 613110176365555319, guid: 8c287ed45b99c74448265178fab2799c, type: 3}
+  spaceSpeed: 10
+  moveNextPlanet: 0
 --- !u!1 &1963424485
 GameObject:
   m_ObjectHideFlags: 0
