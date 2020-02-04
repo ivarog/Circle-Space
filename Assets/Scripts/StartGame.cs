@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class StartGame : MonoBehaviour
 {
@@ -11,18 +13,37 @@ public class StartGame : MonoBehaviour
     [SerializeField] Animator planetSpaceAnimator;
     [SerializeField] GameObject planet;
     [SerializeField] GameObject ship;
+    [SerializeField] Button againButton;
 
     bool momentToZoomMainPlanets = false;
+
 
     private void Start() 
     {
         planetSpaceAnimator.enabled = false;
         planetsSpace.transform.localScale = Vector3.zero;
+        againButton.interactable = false;
     }
 
     public void FadeButton()
     {
-        buttonAnimator.Play("Fade Button");
+        if(GameObject.Find("Planets Space") == null)
+        {
+            GameObject actualPlanetSpace =Instantiate(planetsSpace);
+            actualPlanetSpace.name = "Planets Space";
+            planetSpaceAnimator = actualPlanetSpace.GetComponent<Animator>();
+            ship = actualPlanetSpace.transform.Find("Ship").gameObject;
+            planetsSpace.transform.localScale = Vector3.zero;
+        }
+        if(EventSystem.current.currentSelectedGameObject.name == "Play Button")
+        {
+            buttonAnimator.Play("Fade Button");
+        }
+        else if(EventSystem.current.currentSelectedGameObject.name == "Again Button")
+        {
+            buttonAnimator.Play("Fade Again Button");
+            againButton.interactable = false;
+        }
         planetsZoom.Play();
         Camera.main.orthographic = false;
         StartCoroutine(EntryMainPlanets());
@@ -41,5 +62,6 @@ public class StartGame : MonoBehaviour
         planetSpaceAnimator.enabled = true;
         planetSpaceAnimator.Play("Zoom Planet Space");
     }
- 
+
+
 }

@@ -7,6 +7,7 @@ public class PlanetSpaceController : MonoBehaviour
     [SerializeField] GameObject ship;
     [SerializeField] GameObject planet;
     [SerializeField] float spaceSpeed;
+    Animator canvasAnimator;
     Rigidbody2D shipRB;
     int planetasCreados = 2;
     Queue<GameObject> planets = new Queue<GameObject>();
@@ -17,7 +18,8 @@ public class PlanetSpaceController : MonoBehaviour
     {
         shipRB = ship.GetComponent<Rigidbody2D>();
         planets.Enqueue(transform.Find("Planet_1").gameObject);    
-        planets.Enqueue(transform.Find("Planet_2").gameObject);    
+        planets.Enqueue(transform.Find("Planet_2").gameObject);
+        canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();    
     }
 
     private void Update() 
@@ -32,6 +34,7 @@ public class PlanetSpaceController : MonoBehaviour
     {
         shipRB.simulated = true;
         CreateNextPlanet();
+        canvasAnimator.Play("Score In");
     }
 
     void CreateNextPlanet()

@@ -17,11 +17,14 @@ public class ShipController : MonoBehaviour
     Rigidbody2D myRb;
     int rotateDirection = 0;
     PlanetSpaceController planetSpaceController;
+    ScoreManager scoreManager;
 
     private void Start() 
     {
         myRb = GetComponent<Rigidbody2D>();    
         planetSpaceController = FindObjectOfType<PlanetSpaceController>();
+        scoreManager = FindObjectOfType<ScoreManager>();
+        Debug.Log(scoreManager);
     }
 
     private void Update() 
@@ -32,16 +35,17 @@ public class ShipController : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Mouse0))
             ThrowShip();
+        ShipOutLimits();
     }
 
     void RotateOnOrbit()
     {
-
         if(firstTouch)
         {
             if(actualPlanet.name != "Planet_1")
             {
                 planetSpaceController.moveNextPlanet = true;
+                scoreManager.IncreaseScore();   
             }
             //Vector del centro del planeta hacia la nave
             Vector3 planetToShip = (this.transform.position - actualPlanet.transform.position).normalized;
@@ -54,15 +58,14 @@ public class ShipController : MonoBehaviour
             //Desactivamos la velocidad
             myRb.velocity = Vector3.zero;
             rotateDirection = Random.Range(0, 2);
+            //Aumento score
             //Ya no es el primer toque de la nave en el planeta y lo desactivamos
             firstTouch = false;
         }
-
         
         float xPos = actualPlanet.transform.position.x + lengthActualPlanetOrbit * Mathf.Cos(anglePlanetShip * Mathf.Deg2Rad);
         float yPos = actualPlanet.transform.position.y + lengthActualPlanetOrbit * Mathf.Sin(anglePlanetShip * Mathf.Deg2Rad);
         transform.position = new Vector3(xPos, yPos, 0f);
-
 
         if(rotateDirection == 0)
         {
@@ -95,6 +98,14 @@ public class ShipController : MonoBehaviour
             actualPlanetBounds = other.gameObject.GetComponent<SpriteRenderer>().bounds.size;
             firstTouch = true;
         }    
+    }
+
+    private void ShipOutLimits()
+    {
+        if(transform.position.y > 6f || transform.position.y < -6f || transform.position.x > 3f || transform.position.x < -3f)
+        {
+            scoreManager.EndGame();
+        }
     }
 
 
