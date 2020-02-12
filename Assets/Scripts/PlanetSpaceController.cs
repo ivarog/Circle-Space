@@ -9,7 +9,7 @@ public class PlanetSpaceController : MonoBehaviour
     [SerializeField] float spaceSpeed;
     Animator canvasAnimator;
     Rigidbody2D shipRB;
-    int planetasCreados = 2;
+    public int createdPlanets = 2;
     Queue<GameObject> planets = new Queue<GameObject>();
     public bool moveNextPlanet = false;
     Vector3 movementSum = Vector3.zero;
@@ -30,31 +30,34 @@ public class PlanetSpaceController : MonoBehaviour
         }    
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Llamada por evento en la animación Zoom Planet Space, inicia la simulación de la nave, crea el tercer planeta//
+    // en escena y mete el score en escena                                                                          //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public void ZoomMainPLanetsEnded()
     {
         shipRB.simulated = true;
+        ship.GetComponent<TrailRenderer>().emitting = true;
         CreateNextPlanet();
         canvasAnimator.Play("Score In");
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Crea tercer planeta con tamaño y posición aleatoria y le coloca el nombre con el número de planeta que es    //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void CreateNextPlanet()
     {
         GameObject newPlanet = Instantiate(planet, gameObject.transform);
-        float planetScale = Random.Range(0.5f, 1.0f);
-        newPlanet.transform.localScale = new Vector3(planetScale, planetScale, 1f);
-        float planetPos = Random.Range(-2f, 2f);
-        if(planetPos + planetScale > 2f)
-        {
-            planetPos = 2f - planetScale; 
-        }
-        else if(planetPos - planetScale < -2f)
-        {
-            planetPos = -2f + planetScale; 
-        }
-        newPlanet.transform.position = new Vector3(planetPos, -9f, 0f);
-        newPlanet.name = "Planet_" + ++planetasCreados;
+        PlanetController planetController = newPlanet.GetComponent<PlanetController>();
+        planetController.InitPlanet(++createdPlanets);
         planets.Enqueue(newPlanet);    
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Destruye el planeta que ha sido desplazado hacia arriba                                                      //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     void DestroyFirstPlanet()
     {
@@ -62,27 +65,25 @@ public class PlanetSpaceController : MonoBehaviour
         Destroy(firstPlanet);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Mueve el tercer planeta a escena destruye el viejo y crea uno nuevo                                          //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public void MovingNextPlanet()
-    {
+    {   
         Vector3 auxVector = Vector3.up * Time.deltaTime * spaceSpeed;
         movementSum += auxVector;
-        foreach(GameObject planet in planets)
-        {
-            if(movementSum.y > 6.0f)
-            {
-                planet.transform.position += auxVector - (movementSum - new Vector3(0f, 6f, 0f));
-            }
-            else
-            {
-                planet.transform.position += auxVector;
-            }
-        }
         if(movementSum.y >= 6.0f)
         {
+            Camera.main.transform.position -= auxVector - (movementSum - new Vector3(0f, 6f, 0f));
             moveNextPlanet = false;
             movementSum = Vector3.zero;
             DestroyFirstPlanet();
             CreateNextPlanet();
+        }
+        else
+        {
+            Camera.main.transform.position -= auxVector;
         }
     }
 }

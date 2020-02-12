@@ -18,6 +18,8 @@ public class ShipController : MonoBehaviour
     int rotateDirection = 0;
     PlanetSpaceController planetSpaceController;
     ScoreManager scoreManager;
+    TrailRenderer trailRenderer;
+    bool disableTrail = false;
 
     private void Start() 
     {
@@ -25,6 +27,7 @@ public class ShipController : MonoBehaviour
         planetSpaceController = FindObjectOfType<PlanetSpaceController>();
         scoreManager = FindObjectOfType<ScoreManager>();
         Debug.Log(scoreManager);
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
     private void Update() 
@@ -36,7 +39,14 @@ public class ShipController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Mouse0))
             ThrowShip();
         ShipOutLimits();
+
+        if(disableTrail)
+            SlowTrailDisable();
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Mantiene a la nave en el planeta rotando, mueve la animación del siguiente planeta e incrementa el score     //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     void RotateOnOrbit()
     {
@@ -77,16 +87,28 @@ public class ShipController : MonoBehaviour
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lanza en la nave en la dirección del vector resultante entre el planeta y la nave                            //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void ThrowShip()
     {
         if(shipOnOrbit)
         {
             shipOnOrbit = false;
+
+            trailRenderer.time = 0.5f;
+            disableTrail = false;
+
             transform.SetParent(planetsSpace.transform);
             Vector3 planetToShip = (this.transform.position - actualPlanet.transform.position).normalized;
             myRb.AddForce(planetToShip * travelVelocity);
         }
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Si la nave colisiona con la orbita de un planeta la nave se queda ahí y habilita el primer toque en él       //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
@@ -94,17 +116,43 @@ public class ShipController : MonoBehaviour
         {
             shipOnOrbit = true;
             actualPlanet = other.gameObject;
+
+            disableTrail = true;
+
             transform.SetParent(actualPlanet.transform);
             actualPlanetBounds = other.gameObject.GetComponent<SpriteRenderer>().bounds.size;
             firstTouch = true;
         }    
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Desactiva el trail de la nave lentamente cuando esta toca un planeta                                         //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+    void SlowTrailDisable() 
+    {
+        if(trailRenderer.time >= 0)
+        {
+            trailRenderer.time -= 0.1f * Time.deltaTime;
+        }
+        else
+        {
+            disableTrail = false;
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Si la nave sale de los límites de la pantalla entonces termina la partida y desactiva el collider del tercer //
+    // planeta                                                                                                      //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private void ShipOutLimits()
     {
-        if(transform.position.y > 6f || transform.position.y < -6f || transform.position.x > 3f || transform.position.x < -3f)
+        Vector3 cameraPosition = Camera.main.transform.position;
+        if(transform.position.y > (cameraPosition.y + 7f) || transform.position.y < (cameraPosition.y - 7f) || transform.position.x > (cameraPosition.x + 3f) || transform.position.x < (cameraPosition.x - 3f))
         {
             scoreManager.EndGame();
+            GameObject.Find("Planet_" + (FindObjectOfType<PlanetSpaceController>().createdPlanets).ToString()).GetComponent<Collider2D>().enabled = false; 
         }
     }
 

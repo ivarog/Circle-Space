@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - CameraResolution
+    - CanvasController
     - PlanetController
     - PlanetSpaceController
     - ScoreManager
@@ -24,7 +25,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateEditor
     - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
@@ -77,60 +77,64 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 95
       Script: {instanceID: 0}
+    - Class: 96
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9704}
+      Script: {instanceID: 9726}
     - Class: 114
-      Script: {instanceID: 9746}
+      Script: {instanceID: 9768}
     - Class: 114
-      Script: {instanceID: 9752}
+      Script: {instanceID: 9774}
     - Class: 114
-      Script: {instanceID: 9842}
+      Script: {instanceID: 9864}
     - Class: 114
-      Script: {instanceID: 9844}
+      Script: {instanceID: 9866}
     - Class: 114
-      Script: {instanceID: 9902}
+      Script: {instanceID: 9924}
     - Class: 114
-      Script: {instanceID: 9914}
+      Script: {instanceID: 9936}
     - Class: 114
-      Script: {instanceID: 9916}
+      Script: {instanceID: 9938}
     - Class: 114
-      Script: {instanceID: 9944}
+      Script: {instanceID: 9966}
     - Class: 114
-      Script: {instanceID: 9954}
+      Script: {instanceID: 9976}
     - Class: 114
-      Script: {instanceID: 10164}
+      Script: {instanceID: 10186}
     - Class: 114
-      Script: {instanceID: 10174}
+      Script: {instanceID: 10196}
     - Class: 114
-      Script: {instanceID: 10448}
+      Script: {instanceID: 10470}
     - Class: 114
-      Script: {instanceID: 10478}
+      Script: {instanceID: 10494}
     - Class: 114
-      Script: {instanceID: 10852}
+      Script: {instanceID: 10502}
     - Class: 114
-      Script: {instanceID: 10918}
+      Script: {instanceID: 10832}
     - Class: 114
-      Script: {instanceID: 11170}
+      Script: {instanceID: 10878}
     - Class: 114
-      Script: {instanceID: 11188}
+      Script: {instanceID: 10944}
     - Class: 114
-      Script: {instanceID: 11288}
+      Script: {instanceID: 11196}
     - Class: 114
-      Script: {instanceID: 11310}
+      Script: {instanceID: 11214}
     - Class: 114
-      Script: {instanceID: 11470}
+      Script: {instanceID: 11314}
     - Class: 114
-      Script: {instanceID: 11492}
+      Script: {instanceID: 11336}
     - Class: 114
-      Script: {instanceID: 11666}
+      Script: {instanceID: 11496}
     - Class: 114
-      Script: {instanceID: 11916}
+      Script: {instanceID: 11518}
     - Class: 114
-      Script: {instanceID: 14662}
+      Script: {instanceID: 11692}
+    - Class: 114
+      Script: {instanceID: 11942}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -176,7 +180,7 @@ ScriptsOnlyBuild:
     className: AudioPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 73f7003db98bf422a7d91acb8396e14b
+      Hash: 417432fd5020be8bc752e78b474336fd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: StartGame
@@ -398,6 +402,12 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
+      Hash: 42f8d6e002da7ed3daea004ecefd2203
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ScoreManager
+  - hash:
+      serializedVersion: 2
       Hash: b8a5e8091ab0b8861d2add371082c5e0
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -468,6 +478,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CanvasController
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -596,7 +612,7 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
-      Hash: e3fa5feb5af7337fd2dfc8d0dcd121e8
+      Hash: dad83a5b0d0466cf2728e7636aff7f34
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlanetSpaceController
@@ -732,12 +748,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 42f8d6e002da7ed3daea004ecefd2203
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ScoreManager
   platform: 13
   scenePathNames:
   - Assets/Scenes/Main.unity

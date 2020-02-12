@@ -8,12 +8,13 @@ public class StartGame : MonoBehaviour
 {
 
     [SerializeField] Animator buttonAnimator;
-    [SerializeField] ParticleSystem planetsZoom;
+    [SerializeField] ParticleSystem planetsZoomParticle;
     [SerializeField] GameObject planetsSpace;
     [SerializeField] Animator planetSpaceAnimator;
     [SerializeField] GameObject planet;
     [SerializeField] GameObject ship;
     [SerializeField] Button againButton;
+    [SerializeField] Text maxScore;
 
     bool momentToZoomMainPlanets = false;
 
@@ -23,7 +24,15 @@ public class StartGame : MonoBehaviour
         planetSpaceAnimator.enabled = false;
         planetsSpace.transform.localScale = Vector3.zero;
         againButton.interactable = false;
+        maxScore.text = "Max: " + PlayerPrefs.GetInt("highScore" , 0).ToString();
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Esta función es llamada cuuadno se da click en el botón play y el botón again, crea un planet space en caso  //
+    // de no existir, aplica las animaciones a los botones y manda a llamar que se inicie el efecto de las          //
+    // partículas. Cambia el valor de la cámara a perspectiva y manda a llamar la Corountine que traera al inicio   //
+    // loa planetas proncipales.                                                                                    //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void FadeButton()
     {
@@ -44,24 +53,35 @@ public class StartGame : MonoBehaviour
             buttonAnimator.Play("Fade Again Button");
             againButton.interactable = false;
         }
-        planetsZoom.Play();
+        planetsZoomParticle.Play();
         Camera.main.orthographic = false;
+        Camera.main.transform.position = new Vector3(0f, 0f, -10f);
         StartCoroutine(EntryMainPlanets());
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Obtiene la duración de el sistema de partículas, espera y llama a los planetas principales a escena          //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     IEnumerator EntryMainPlanets()
     {
-        float seconds = planetsZoom.main.duration + 1.8f;
+        float seconds = planetsZoomParticle.main.duration + 1.8f;
         yield return new WaitForSeconds(seconds);
         ZoomMainPLanets();
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Regresa la cámara a la visión ortográfica, detiene todas las partículas, e inicia la animación donde se      //
+    // muestran los planetas principales                                                                            //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     void ZoomMainPLanets()
     {
         Camera.main.orthographic = true;
+        planetsZoomParticle.Stop (true, ParticleSystemStopBehavior.StopEmittingAndClear);
         planetSpaceAnimator.enabled = true;
         planetSpaceAnimator.Play("Zoom Planet Space");
     }
-
-
 }
