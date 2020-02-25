@@ -13,6 +13,7 @@ public class PlanetSpaceController : MonoBehaviour
     Queue<GameObject> planets = new Queue<GameObject>();
     public bool moveNextPlanet = false;
     Vector3 movementSum = Vector3.zero;
+    TrashGenerator trashGenerator;
 
     private void Start() 
     {
@@ -20,6 +21,7 @@ public class PlanetSpaceController : MonoBehaviour
         planets.Enqueue(transform.Find("Planet_1").gameObject);    
         planets.Enqueue(transform.Find("Planet_2").gameObject);
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();    
+        trashGenerator = FindObjectOfType<TrashGenerator>();
     }
 
     private void Update() 
@@ -80,10 +82,12 @@ public class PlanetSpaceController : MonoBehaviour
             movementSum = Vector3.zero;
             DestroyFirstPlanet();
             CreateNextPlanet();
+            trashGenerator.canGenerateTrash = true;
         }
         else
         {
             Camera.main.transform.position -= auxVector;
+            trashGenerator.canGenerateTrash = false;
         }
     }
 }

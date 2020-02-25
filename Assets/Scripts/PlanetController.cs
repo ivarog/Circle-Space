@@ -33,23 +33,23 @@ public class PlanetController : MonoBehaviour
         {
             planetScale = Random.Range(0.7f, 0.8f);
         }
-        else if(actualScore > 5 && actualScore <= 10)
+        else if(actualScore > 5 && actualScore <= 20)
         {
             planetScale = Random.Range(0.6f, 0.7f);
         }
-        else if(actualScore > 10 && actualScore <= 20)
+        else if(actualScore > 20 && actualScore <= 35)
         {
             planetScale = Random.Range(0.5f, 0.6f);
         }
-        else if(actualScore > 20 && actualScore <= 30)
+        else if(actualScore > 35 && actualScore <= 50)
         {
             planetScale = Random.Range(0.4f, 0.5f);
         }
-        else if(actualScore > 30 && actualScore <= 50)
+        else if(actualScore > 50 && actualScore <= 65)
         {
             planetScale = Random.Range(0.3f, 0.4f);
         }
-        else if(actualScore > 50)
+        else if(actualScore > 65)
         {
             planetScale = Random.Range(0.2f, 0.3f);
         }
