@@ -26,7 +26,7 @@ public class ShipController : MonoBehaviour
         myRb = GetComponent<Rigidbody2D>();    
         planetSpaceController = FindObjectOfType<PlanetSpaceController>();
         scoreManager = FindObjectOfType<ScoreManager>();
-        Debug.Log(scoreManager);
+        // Debug.Log(scoreManager);
         trailRenderer = GetComponent<TrailRenderer>();
     }
 
@@ -56,6 +56,7 @@ public class ShipController : MonoBehaviour
             {
                 planetSpaceController.moveNextPlanet = true;
                 scoreManager.IncreaseScore();   
+                actualPlanet.gameObject.transform.Find("Particle System").GetComponent<ParticleSystem>().Play();
             }
             //Vector del centro del planeta hacia la nave
             Vector3 planetToShip = (this.transform.position - actualPlanet.transform.position).normalized;

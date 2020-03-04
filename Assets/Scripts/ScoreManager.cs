@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    //Para manejar eventos de score
+    public delegate void IncreasedScore();
+    public static event IncreasedScore OnIncreased;
+    public delegate void EndingGame();
+    public static event EndingGame OnEndGame;
+
     int score = 0;
     public int Score
     {
@@ -13,6 +19,9 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] Animator buttonAnimator;
     [SerializeField] Text scoreUI;
+    [SerializeField] Animator canvasAnimator;
+    [SerializeField] GameObject maxScore;
+    [SerializeField] GameObject points;
 
     private void Start() 
     {
@@ -29,6 +38,8 @@ public class ScoreManager : MonoBehaviour
         score++;
         scoreUI.text = score.ToString();
         buttonAnimator.Play("IncreaseScore", -1, 0f);
+        if(OnIncreased != null)
+            OnIncreased();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,15 +49,23 @@ public class ScoreManager : MonoBehaviour
     public void EndGame()
     {
         Debug.Log("Game Ended");
+        if(OnEndGame != null)
+            OnEndGame();
+
+        buttonAnimator.Play("Show Again Button");
+        maxScore.SetActive(true);
+        points.SetActive(true);
+        canvasAnimator.Play("MxScoreIn");
+        
         if(score > PlayerPrefs.GetInt("highScore"))
         {
             PlayerPrefs.SetInt("highScore", score);
-            GameObject.Find("Max Score").GetComponent<Text>().text = "Max: " + PlayerPrefs.GetInt("highScore").ToString();
         }
+        GameObject.Find("Points").GetComponent<Text>().text = PlayerPrefs.GetInt("highScore").ToString();
         score = 0;    
         scoreUI.text = score.ToString();
-        buttonAnimator.Play("Show Again Button");
-        Destroy(GameObject.Find("Planets Space"), 1f);
+
+        Destroy(GameObject.Find("Planets Space"), 0.5f);
     }
 
 }

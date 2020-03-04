@@ -20,21 +20,25 @@ public class TrashGenerator : MonoBehaviour
     {
         int actualScore = scoreManager.Score;
 
-        if(canGenerateTrash && actualScore > 15)
+        if(canGenerateTrash && actualScore > 8)
         {
-            CancelInvoke("CreateTrash");
-            canGenerateTrash = false;
-            InvokeRepeating("CreateTrash", 0.5f, 2f);
-            int generatorSide = Random.Range(0, 2);
-            if(generatorSide == 0)
+            int randomGenerate = Random.Range(0, 3);
+            if(randomGenerate == 0)
             {
-                myside = Side.left;
-                this.transform.position = new Vector3(-4.5f, Camera.main.transform.position.y, 0.0f);
-            } 
-            else
-            {
-                myside = Side.right;
-                this.transform.position = new Vector3(4.5f, Camera.main.transform.position.y, 0.0f);
+                CancelInvoke("CreateTrash");
+                canGenerateTrash = false;
+                InvokeRepeating("CreateTrash", 0.5f, 2f);
+                int generatorSide = Random.Range(0, 2);
+                if(generatorSide == 0)
+                {
+                    myside = Side.left;
+                    this.transform.position = new Vector3(-4.5f, Camera.main.transform.position.y, 0.0f);
+                } 
+                else
+                {
+                    myside = Side.right;
+                    this.transform.position = new Vector3(4.5f, Camera.main.transform.position.y, 0.0f);
+                }
             }
         }
     }

@@ -15,6 +15,7 @@ public class StartGame : MonoBehaviour
     [SerializeField] GameObject ship;
     [SerializeField] Button againButton;
     [SerializeField] Text maxScore;
+    [SerializeField] GameObject title;
 
     bool momentToZoomMainPlanets = false;
 
@@ -24,7 +25,6 @@ public class StartGame : MonoBehaviour
         planetSpaceAnimator.enabled = false;
         planetsSpace.transform.localScale = Vector3.zero;
         againButton.interactable = false;
-        maxScore.text = "Max: " + PlayerPrefs.GetInt("highScore" , 0).ToString();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,6 +79,7 @@ public class StartGame : MonoBehaviour
 
     void ZoomMainPLanets()
     {
+        Destroy(title);
         Camera.main.orthographic = true;
         planetsZoomParticle.Stop (true, ParticleSystemStopBehavior.StopEmittingAndClear);
         planetSpaceAnimator.enabled = true;
