@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AudioManager
     - BackgroundColor
     - CameraResolution
     - CanvasController
@@ -72,6 +73,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -103,27 +106,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12030}
     - Class: 114
-      Script: {instanceID: 12382}
+      Script: {instanceID: 12320}
     - Class: 114
-      Script: {instanceID: 12446}
+      Script: {instanceID: 12384}
     - Class: 114
-      Script: {instanceID: 12506}
+      Script: {instanceID: 12448}
     - Class: 114
-      Script: {instanceID: 12768}
+      Script: {instanceID: 12508}
     - Class: 114
-      Script: {instanceID: 12786}
+      Script: {instanceID: 12770}
     - Class: 114
-      Script: {instanceID: 12796}
+      Script: {instanceID: 12788}
     - Class: 114
-      Script: {instanceID: 12916}
+      Script: {instanceID: 12798}
     - Class: 114
-      Script: {instanceID: 13094}
+      Script: {instanceID: 12918}
     - Class: 114
-      Script: {instanceID: 13116}
+      Script: {instanceID: 13096}
     - Class: 114
-      Script: {instanceID: 13296}
+      Script: {instanceID: 13118}
     - Class: 114
-      Script: {instanceID: 13558}
+      Script: {instanceID: 13300}
+    - Class: 114
+      Script: {instanceID: 13562}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -389,7 +394,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: e538462eaaa7f1a9a4a385c8279b16f8
+      Hash: 9c108eae21b6537b6f1a7ccad776b9bd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ScoreManager
@@ -447,6 +452,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
+  - hash:
+      serializedVersion: 2
+      Hash: f3f44bbf57e44369d1448eb58d37620c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AudioManager
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f

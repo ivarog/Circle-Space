@@ -77,59 +77,7 @@ public class BackgroundColor : MonoBehaviour
             canChangeColor = true;
 
         }
-        // switch(score)
-        // {
-        //     case 2:
-        //         colorA = color0;
-        //         colorB = color10;
-        //         canChangeColor = true;
-        //         break;
-        //     case 20:
-        //         colorA = color10;
-        //         colorB = color20;
-        //         canChangeColor = true;
-        //         break;
-        //     case 30:
-        //         colorA = color20;
-        //         colorB = color30;
-        //         canChangeColor = true;
-        //         break;
-        //     case 40:
-        //         colorA = color30;
-        //         colorB = color40;
-        //         canChangeColor = true;
-        //         break;
-        //     case 50:
-        //         colorA = color40;
-        //         colorB = color50;
-        //         canChangeColor = true;
-        //         break;
-        //     case 60:
-        //         colorA = color50;
-        //         colorB = color60;
-        //         canChangeColor = true;
-        //         break;
-        //     case 70:
-        //         colorA = color60;
-        //         colorB = color70;
-        //         canChangeColor = true;
-        //         break;
-        //     case 80:
-        //         colorA = color70;
-        //         colorB = color80;
-        //         canChangeColor = true;
-        //         break;
-        //     case 90:
-        //         colorA = color80;
-        //         colorB = color90;
-        //         canChangeColor = true;
-        //         break;
-        //     case 100:
-        //         colorA = color90;
-        //         colorB = color100;
-        //         canChangeColor = true;
-        //         break;
-        // }
+   
     }
 
     void SmooothTransitionColor(Color colorA, Color colorB)

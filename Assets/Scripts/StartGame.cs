@@ -53,6 +53,7 @@ public class StartGame : MonoBehaviour
             buttonAnimator.Play("Fade Again Button");
             againButton.interactable = false;
         }
+        FindObjectOfType<AudioManager>().Play("Kick");
         planetsZoomParticle.Play();
         Camera.main.orthographic = false;
         Camera.main.transform.position = new Vector3(0f, 0f, -10f);
@@ -67,6 +68,7 @@ public class StartGame : MonoBehaviour
     IEnumerator EntryMainPlanets()
     {
         float seconds = planetsZoomParticle.main.duration + 1.8f;
+        FindObjectOfType<AudioManager>().Play("Rocket", true);
         yield return new WaitForSeconds(seconds);
         ZoomMainPLanets();
     }

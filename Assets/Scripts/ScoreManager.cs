@@ -22,11 +22,12 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] Animator canvasAnimator;
     [SerializeField] GameObject maxScore;
     [SerializeField] GameObject points;
+    [SerializeField] GameObject actualPoints;
 
     private void Start() 
     {
         score = 0;    
-        
+        FindObjectOfType<AudioManager>().Play("QuietMorning");
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,13 +49,13 @@ public class ScoreManager : MonoBehaviour
 
     public void EndGame()
     {
-        Debug.Log("Game Ended");
         if(OnEndGame != null)
             OnEndGame();
 
         buttonAnimator.Play("Show Again Button");
         maxScore.SetActive(true);
         points.SetActive(true);
+        actualPoints.SetActive(true);
         canvasAnimator.Play("MxScoreIn");
         
         if(score > PlayerPrefs.GetInt("highScore"))
@@ -62,6 +63,8 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetInt("highScore", score);
         }
         GameObject.Find("Points").GetComponent<Text>().text = PlayerPrefs.GetInt("highScore").ToString();
+        Debug.Log("Score " + score);
+        GameObject.Find("Actual Points").GetComponent<Text>().text = score.ToString();
         score = 0;    
         scoreUI.text = score.ToString();
 

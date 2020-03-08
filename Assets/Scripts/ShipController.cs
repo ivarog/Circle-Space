@@ -20,6 +20,7 @@ public class ShipController : MonoBehaviour
     ScoreManager scoreManager;
     TrailRenderer trailRenderer;
     bool disableTrail = false;
+    bool canFinishGame = true;
 
     private void Start() 
     {
@@ -57,6 +58,7 @@ public class ShipController : MonoBehaviour
                 planetSpaceController.moveNextPlanet = true;
                 scoreManager.IncreaseScore();   
                 actualPlanet.gameObject.transform.Find("Particle System").GetComponent<ParticleSystem>().Play();
+                FindObjectOfType<AudioManager>().Play("Bell", true);
             }
             //Vector del centro del planeta hacia la nave
             Vector3 planetToShip = (this.transform.position - actualPlanet.transform.position).normalized;
@@ -150,10 +152,11 @@ public class ShipController : MonoBehaviour
     private void ShipOutLimits()
     {
         Vector3 cameraPosition = Camera.main.transform.position;
-        if(transform.position.y > (cameraPosition.y + 7f) || transform.position.y < (cameraPosition.y - 7f) || transform.position.x > (cameraPosition.x + 3f) || transform.position.x < (cameraPosition.x - 3f))
+        if(canFinishGame && (transform.position.y > (cameraPosition.y + 7f) || transform.position.y < (cameraPosition.y - 7f) || transform.position.x > (cameraPosition.x + 3f) || transform.position.x < (cameraPosition.x - 3f)))
         {
             scoreManager.EndGame();
             GameObject.Find("Planet_" + (FindObjectOfType<PlanetSpaceController>().createdPlanets).ToString()).GetComponent<Collider2D>().enabled = false; 
+            canFinishGame = false;
         }
     }
 

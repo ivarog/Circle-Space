@@ -23,10 +23,10 @@ public class TrashGenerator : MonoBehaviour
         if(canGenerateTrash && actualScore > 8)
         {
             int randomGenerate = Random.Range(0, 3);
+            canGenerateTrash = false;
             if(randomGenerate == 0)
             {
                 CancelInvoke("CreateTrash");
-                canGenerateTrash = false;
                 InvokeRepeating("CreateTrash", 0.5f, 2f);
                 int generatorSide = Random.Range(0, 2);
                 if(generatorSide == 0)
